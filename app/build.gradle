@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    defaultConfig {
+        applicationId "com.laka.lakamvp"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // 混淆文件
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+
+    signingConfigs {
+        debug{
+//            storeFile file("xxx.keystore")
+//            storePassword "123123"
+//            keyAlias "xxx"
+//            keyPassword "123123"
+//            v2SigningEnabled true // 启用V2签名方案
+        }
+        release{
+//            storeFile file("xxx.keystore")
+//            storePassword "123123"
+//            keyAlias "xxx"
+//            keyPassword "123123"
+//            v2SigningEnabled true // 启用V2签名方案
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+            buildConfigField("String","BASE_URL","\"release\"") // 配置接口服务器
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            buildConfigField("String","BASE_URL","\"debug\"") // 配置接口服务器
+        }
+    }
+
+    flavorDimensions("channel")
+//    多渠道打包配置
+    productFlavors{
+        wangdoujia{
+            dimension "channel"
+//          可以另外指定包名
+//          applicationId "com.laka.lakamvp.wangdoujia"
+            buildConfigField("String","CHANNEL","\"wangdoujia\"")
+            // 动态替换 manifest 中的 meta_data 字段
+            manifestPlaceholders = ["UMENG_CHANNEL":"wangdoujia"]
+        }
+        xiaomi{
+            dimension "channel"
+//          可以另外指定包名
+//          applicationId "com.laka.lakamvp.xiaomi"
+            buildConfigField("String","CHANNEL","\"xiaomi\"")
+            manifestPlaceholders = ["UMENG_CHANNEL":"xiaomi"]
+        }
+        huawei{
+            dimension "channel"
+//          可以另外指定包名
+//          applicationId "com.laka.lakamvp.huawei"
+            buildConfigField("String","CHANNEL","\"huawei\"")
+            manifestPlaceholders = ["UMENG_CHANNEL":"huawei"]
+        }
+    }
+
+
+
+}
+
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':mvplibrary')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}

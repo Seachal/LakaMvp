@@ -12,7 +12,9 @@ import com.laka.mvplibrary.utils.NetworkUtil;
 import java.util.ArrayList;
 
 /**
- * Created by luwies on 16/5/30.
+ * @Author:summer
+ * @Date:2018/12/14
+ * @Description:
  */
 public class NetworkChangeObserver {
 

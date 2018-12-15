@@ -5,4 +5,6 @@ package com.laka.mvplibrary.model;
  */
 
 public interface IModel {
+
+    void onDestory();
 }

@@ -1,0 +1,9 @@
+RtHttp.with(this) //设置Context
+                .setShowWaitingDialog(true) //设置显示网络加载动画
+                .setObservable(MobileApi.response(map,ProtocolUtils.PROTOCOL_MSG_ID_LOGIN))//MobileApi.response 返回一个Observalbe
+                .subscriber(new ApiSubscriber<JSONObject>() { //设置Subscriber，ApiSubscriber封装Subscriber;返回JSONObject仅是因为适配替换成Retrofit前的老代码
+                    @Override
+                    public void onNext(JSONObject result) {    //只实现OnNext方法
+                         //具体业务逻辑
+                    }
+                });

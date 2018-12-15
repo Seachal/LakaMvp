@@ -166,7 +166,7 @@ public abstract class BaseFragment extends Fragment implements IView, NetworkCha
                 return;
             }
             mIsLostInternet = true;
-            showErrorView();
+            showErrorView(); // 无网络，直接显示错误界面
         }
     }
 

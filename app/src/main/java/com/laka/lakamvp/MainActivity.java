@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 
 import java.lang.reflect.Method;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,27 +22,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 获取渠道号
-//                try {
-//                    ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
-//                    String umengChannelValue = info.metaData.getString("UMENG_CHANNEL_VALUE");
-//                    Log.i(TAG, umengChannelValue);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-                test("hello world");
-            }
-        });
+//        findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // 获取渠道号
+////                try {
+////                    ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
+////                    String umengChannelValue = info.metaData.getString("UMENG_CHANNEL_VALUE");
+////                    Log.i(TAG, umengChannelValue);
+////                } catch (Exception e) {
+////                    e.printStackTrace();
+////                }
+//                test("hello world");
+//            }
+//        });
+//
+//        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                test(null);
+//            }
+//        });
 
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+
+
+
+
+//        AppOpsManager appOpsManager = (AppOpsManager) getSystemService(APP_OPS_SERVICE);
+//        int checkOp = appOpsManager.checkOp(AppOpsManager.OPSTR_FINE_LOCATION, Process.myUid(), getPackageName());
+//        if (checkOp == AppOpsManager.MODE_IGNORED) {
+//            // 权限被拒绝了 .
+//        }
+
+
+        final Timer timer = new Timer(true);
+        final TimerTask timerTask = new TimerTask() {
             @Override
-            public void onClick(View v) {
-                test(null);
+            public void run() {
+                Log.e("main","------------------ 定时测试 ------------------");
             }
-        });
+        };
+        timer.schedule(timerTask,1000,1000);
     }
 
 

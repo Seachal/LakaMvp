@@ -16,20 +16,21 @@ import java.util.List;
  * model 层基类
  */
 
-public class BaseModel implements IModel {
+public class BaseModel<T> implements IModel {
 
     private List<Subscription> mSubscriptionList = new ArrayList<>();
 
-    public <T> void postLoad(String url, HashMap<String, String> parameter, final RequestModelCallBack<T> callBack) {
+    public void postLoad(String url, HashMap<String, String> parameter, final RequestModelCallBack<T> callBack) {
         postLoad(url, parameter, false, callBack);
     }
 
-    public <T> void postLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, final RequestModelCallBack<T> callBack) {
+    public void postLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, final RequestModelCallBack<T> callBack) {
         postLoad(url, parameter, isAddCommonParameter, false, callBack);
     }
 
-    public <T> void postLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, boolean isAddHeader, final RequestModelCallBack<T> callBack) {
+    public void postLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, boolean isAddHeader, final RequestModelCallBack<T> callBack) {
         RxHttp.getInstance().setFlowable(MobileApi.getFlowble(MobileApi.getApiService(isAddCommonParameter, isAddHeader).postRequest(url)))
+                .compose() // 线程调度
                 .subscriber(new ApiSubscriber<T>() {
                     @Override
                     public void onSubscribe(Subscription s) {
@@ -44,16 +45,17 @@ public class BaseModel implements IModel {
                 });
     }
 
-    public <T> void getLoad(String url, HashMap<String, String> parameter, final RequestModelCallBack<T> callBack) {
+    public void getLoad(String url, HashMap<String, String> parameter, final RequestModelCallBack<T> callBack) {
         postLoad(url, parameter, false, callBack);
     }
 
-    public <T> void getLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, final RequestModelCallBack<T> callBack) {
+    public void getLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, final RequestModelCallBack<T> callBack) {
         postLoad(url, parameter, isAddCommonParameter, false, callBack);
     }
 
-    public <T> void getLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, boolean isAddHeader, final RequestModelCallBack<T> callBack) {
+    public void getLoad(String url, HashMap<String, String> parameter, boolean isAddCommonParameter, boolean isAddHeader, final RequestModelCallBack<T> callBack) {
         RxHttp.getInstance().setFlowable(MobileApi.getFlowble(MobileApi.getApiService(isAddCommonParameter, isAddHeader).getRequest(url)))
+                .compose()  // 线程调度
                 .subscriber(new ApiSubscriber<T>() {
                     @Override
                     public void onSubscribe(Subscription s) {
@@ -70,7 +72,9 @@ public class BaseModel implements IModel {
 
 
     //TODO 上传json、上传图片
-
+    public void uploadJson(String json) {
+        // MobileApi.getApiService()
+    }
 
     @Override
     public void onDestory() {

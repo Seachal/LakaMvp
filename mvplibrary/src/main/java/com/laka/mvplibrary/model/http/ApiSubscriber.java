@@ -23,7 +23,7 @@ import retrofit2.HttpException;
  */
 public abstract class ApiSubscriber<T> implements Subscriber<T> {
 
-    private Context mCtx;
+    private Context mContext;
     // private WaitingDialog waitingDialog;  //加载dialog
     private boolean isShowWaitDialog;
 
@@ -48,7 +48,7 @@ public abstract class ApiSubscriber<T> implements Subscriber<T> {
     }
 
     public void setmCtx(Context mCtx) {
-        this.mCtx = mCtx;
+        this.mContext = mCtx;
     }
 
 
@@ -63,10 +63,6 @@ public abstract class ApiSubscriber<T> implements Subscriber<T> {
             dismissDialog();
         }
         Throwable throwable = e;
-//        if (Log.isDebuggable()) {
-//            Log.i(RtHttp.TAG, throwable.getMessage().toString());
-//        }
-
         /**
          * 获取根源 异常
          */
@@ -99,7 +95,7 @@ public abstract class ApiSubscriber<T> implements Subscriber<T> {
     }
 
     /**
-     * 服务器返回的错误
+     * 服务器返回的错误，根据服务器定义的错误码弹出不同的提示
      *
      * @param ex
      */

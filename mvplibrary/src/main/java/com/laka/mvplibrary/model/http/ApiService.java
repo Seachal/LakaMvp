@@ -7,6 +7,7 @@ import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -24,17 +25,17 @@ public interface ApiService {
 
     @POST()
     @FormUrlEncoded
-    Flowable<ResponseBody> postRequest(@Url() String url, @FieldMap Map<String, String> params);
+    Flowable<ResponseInfo> postRequest(@Url() String url, @FieldMap Map<String, String> params);
 
     @POST()
-    Flowable<ResponseBody> postRequest(@Url() String url);
+    Flowable<ResponseInfo> postRequest(@Url() String url);
 
     @GET()
     @FormUrlEncoded
-    Flowable<ResponseBody> getRequest(@Url() String url, @FieldMap Map<String, String> params);
+    Flowable<ResponseInfo> getRequest(@Url() String url, @FieldMap Map<String, String> params);
 
     @GET()
-    Flowable<ResponseBody> getRequest(@Url() String url);
+    Flowable<ResponseInfo> getRequest(@Url() String url);
 
     /**
      * 多参数多图片上传
@@ -44,7 +45,15 @@ public interface ApiService {
      * @return
      */
     @POST()
-    Flowable<ResponseBody> uploadImage(@Url() String url, @PartMap() Map<String, RequestBody> maps, @Part List<MultipartBody.Part> filePart);
+    Flowable<ResponseInfo> uploadImage(@Url() String url, @PartMap() Map<String, RequestBody> maps, @Part List<MultipartBody.Part> filePart);
+
+    /**
+     * 上传json数据
+     * @param url
+     * @return
+     */
+    @POST
+    Flowable<ResponseInfo> uploadJson(@Url() String url, @Body RequestBody jsonBody);
 
 
 }

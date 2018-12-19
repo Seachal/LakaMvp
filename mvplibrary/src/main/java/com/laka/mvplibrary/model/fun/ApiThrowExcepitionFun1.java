@@ -15,10 +15,9 @@ public class ApiThrowExcepitionFun1<T> implements Function<ResponseInfo<T>, Flow
 
     @Override
     public Flowable<T> apply(ResponseInfo<T> responseInfo) throws Exception {
-        if (responseInfo.getCode()!= 200) {  //如果code返回的不是200,则抛出ApiException异常，否则返回data数据
+        if (responseInfo.getCode()!= 200) {  // 如果code返回的不是200,则抛出ApiException异常，否则返回data数据
             return Flowable.error(new ApiException(responseInfo.getCode(),responseInfo.getMessage()));
         }
         return Flowable.just(responseInfo.getData());
-
     }
 }

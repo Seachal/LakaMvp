@@ -1,37 +1,16 @@
 package com.laka.mvplibrary.model.http;
 
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * @Author:summer
  * @Date:2018/12/14
  * @Description:网络请求总入口
  */
-
-import android.text.TextUtils;
-
-import com.laka.mvplibrary.BuildConfig;
-import com.laka.mvplibrary.model.interceptor.CommonParameterIntercepter;
-import com.laka.mvplibrary.model.interceptor.DynamicParameterIntercepter;
-import com.laka.mvplibrary.model.interceptor.LogIntercepter;
-
-import java.util.HashMap;
-
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * 网络请求总入口
- */
-public class RxHttp<T> {
+public class RxHttp {
 
     public static final String TAG = "RxHttp";
     public static RxHttp instance;
@@ -62,16 +41,17 @@ public class RxHttp<T> {
      * @param flowable
      * @return
      */
-    public RxHttp setFlowable(Flowable flow) {
+    public <T> RxHttp setFlowable(Flowable<T> flow) {
         mFlowable = flow;
         return instance;
     }
 
     /**
      * 线程调度
+     *
      * @return
      */
-    public RxHttp compose(){
+    public RxHttp compose() {
         mFlowable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return instance;
@@ -79,14 +59,15 @@ public class RxHttp<T> {
 
     /**
      * 添加公共参数
+     *
      * @return
      */
-    public RxHttp addCommonParameter(boolean addCommonParameter){
+    public RxHttp addCommonParameter(boolean addCommonParameter) {
         mAddCommonParameter = addCommonParameter;
         return instance;
     }
 
-    public <T> RxHttp<T> addDynamicParameter(boolean isAddDynamicParameter) {
+    public <T> RxHttp addDynamicParameter(boolean isAddDynamicParameter) {
         mAddDynamicParameter = isAddDynamicParameter;
         return instance;
     }
@@ -98,11 +79,10 @@ public class RxHttp<T> {
      * @param subscriber
      * @return
      */
-    public RxHttp subscriber(ApiSubscriber<T> subscriber) {
+    public <T> RxHttp subscriber(ApiSubscriber<T> subscriber) {
         mFlowable.subscribe(subscriber); //RxJava
         return instance;
     }
-
 
 
 }

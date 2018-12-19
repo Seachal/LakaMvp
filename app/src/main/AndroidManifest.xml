@@ -13,18 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
-
         <activity android:name=".MainActivity">
-
             <meta-data
                 android:name="UMENG_CHANNEL_VALUE"
                 android:value="${UMENG_CHANNEL}" />
         </activity>
-        <activity android:name=".Test1Activity"/>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Test1Activity" />
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".DrawerLayoutActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
     </application>

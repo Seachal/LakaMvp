@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     defaultConfig {
@@ -15,14 +15,14 @@ android {
     }
 
     signingConfigs {
-        debug{
+        debug {
 //            storeFile file("xxx.keystore")
 //            storePassword "123123"
 //            keyAlias "xxx"
 //            keyPassword "123123"
 //            v2SigningEnabled true // 启用V2签名方案
         }
-        release{
+        release {
 //            storeFile file("xxx.keystore")
 //            storePassword "123123"
 //            keyAlias "xxx"
@@ -37,42 +37,41 @@ android {
             shrinkResources true
             zipAlignEnabled true
             signingConfig signingConfigs.release
-            buildConfigField("String","BASE_URL","\"release\"") // 配置接口服务器
+            buildConfigField("String", "BASE_URL", "\"release\"") // 配置接口服务器
         }
         debug {
             minifyEnabled false
             signingConfig signingConfigs.debug
-            buildConfigField("String","BASE_URL","\"debug\"") // 配置接口服务器
+            buildConfigField("String", "BASE_URL", "\"debug\"") // 配置接口服务器
         }
     }
 
     flavorDimensions("channel")
 //    多渠道打包配置
-    productFlavors{
-        wangdoujia{
+    productFlavors {
+        wangdoujia {
             dimension "channel"
 //          可以另外指定包名
 //          applicationId "com.laka.lakamvp.wangdoujia"
-            buildConfigField("String","CHANNEL","\"wangdoujia\"")
+            buildConfigField("String", "CHANNEL", "\"wangdoujia\"")
             // 动态替换 manifest 中的 meta_data 字段
-            manifestPlaceholders = ["UMENG_CHANNEL":"wangdoujia"]
+            manifestPlaceholders = ["UMENG_CHANNEL": "wangdoujia"]
         }
-        xiaomi{
+        xiaomi {
             dimension "channel"
 //          可以另外指定包名
 //          applicationId "com.laka.lakamvp.xiaomi"
-            buildConfigField("String","CHANNEL","\"xiaomi\"")
-            manifestPlaceholders = ["UMENG_CHANNEL":"xiaomi"]
+            buildConfigField("String", "CHANNEL", "\"xiaomi\"")
+            manifestPlaceholders = ["UMENG_CHANNEL": "xiaomi"]
         }
-        huawei{
+        huawei {
             dimension "channel"
 //          可以另外指定包名
 //          applicationId "com.laka.lakamvp.huawei"
-            buildConfigField("String","CHANNEL","\"huawei\"")
-            manifestPlaceholders = ["UMENG_CHANNEL":"huawei"]
+            buildConfigField("String", "CHANNEL", "\"huawei\"")
+            manifestPlaceholders = ["UMENG_CHANNEL": "huawei"]
         }
     }
-
 
 
 }

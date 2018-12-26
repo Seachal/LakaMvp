@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/easyui/easyui.iml" filepath="$PROJECT_DIR$/easyui/easyui.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmentlibrary/fragmentlibrary.iml" filepath="$PROJECT_DIR$/fragmentlibrary/fragmentlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvplibrary/mvplibrary.iml" filepath="$PROJECT_DIR$/mvplibrary/mvplibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/okhttpmodule/okhttpmodule.iml" filepath="$PROJECT_DIR$/okhttpmodule/okhttpmodule.iml" />
     </modules>
   </component>
 </project>

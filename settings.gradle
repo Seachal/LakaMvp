@@ -1,1 +1,1 @@
-include ':app', ':mvplibrary', ':commonlibrary', ':easyui', ':fragmentlibrary'
+include ':app', ':mvplibrary', ':commonlibrary', ':easyui', ':fragmentlibrary', ':okhttpmodule'

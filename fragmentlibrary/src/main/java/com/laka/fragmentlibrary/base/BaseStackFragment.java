@@ -13,7 +13,7 @@ import com.laka.fragmentlibrary.R;
 /**
  * @Author:summer
  * @Date:2018/12/27
- * @Description:Fragment栈管理基类,只需要在自定义的BaseFragment中继承此类即可使用Fragment任务栈,如果自定义的BaseFragment需要继承第三方的LazyFragment,则可以更改当前类继承的父类
+ * @Description:作废的fragment基类
  */
 public abstract class BaseStackFragment extends Fragment {
 

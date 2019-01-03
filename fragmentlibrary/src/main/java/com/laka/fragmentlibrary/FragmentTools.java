@@ -15,8 +15,8 @@ import com.laka.fragmentlibrary.base.BaseStackFragment;
 public class FragmentTools {
 
 
-    public static void pushScreen(Class<? extends BaseStackFragment> baseStackFragment){
-        pushScreen(baseStackFragment,new Bundle());
+    public static void pushScreen(Class<? extends BaseStackFragment> baseStackFragment) {
+        pushScreen(baseStackFragment, new Bundle());
     }
 
     /**
@@ -33,12 +33,19 @@ public class FragmentTools {
             BaseStackFragment currentFragment = baseStackFragment.newInstance();
             currentFragment.setArguments(args);
             FragmentConfig.mCurrentFragment = currentFragment;
+            // fragmentManager.beginTransaction() 其实就是创建一个BackStackRecord 对象，该对象实现
+            // FragmentTransaction 接口，BackStackRecord 表示 Fragment的一次操作。
             FragmentTransaction transaction = FragmentConfig.v4FragmentManager.beginTransaction();
             // 设置Fragment转场方式
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            // 将新的Fragment添加到BaseStackFragment基类中定义的跟布局ID中去
+            // 将新的Fragment添加到指定ID的布局中区，使用Fragment的activity需要提供一个相同ID的layout出来
             transaction.add(R.id.fragment_root_view, currentFragment, baseStackFragment.getName());
-            // 添加到回退栈中,这样fragment就可以像activity一样回退了(点击后退键fragment栈会一个个回退出来)
+            // 判断当前fragment是否是fragmentManager的第一个fragment，如果是，则不添加到回退栈
+//            int fragmentCount = FragmentConfig.v4FragmentManager.getFragments().size();
+//            if (fragmentCount != 0) {
+//                // 添加到回退栈中,这样fragment就可以像activity一样回退了(点击后退键fragment栈会一个个回退出来)
+//                transaction.addToBackStack(baseStackFragment.getName());
+//            }
             transaction.addToBackStack(baseStackFragment.getName());
             transaction.commit();
             setRootScreen(baseStackFragment.getName());
